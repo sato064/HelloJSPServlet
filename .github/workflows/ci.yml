@@ -1,0 +1,30 @@
+name: CI & Image push
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Login to docker registry
+        run: docker login -u $REGISTRY_USER -p $REGISTRY_PASSWORD diamond.u-gakugei.ac.jp
+        env:
+          REGISTRY_USER: ${{ secrets.DIAMOND_REGISTRY_USER }}
+          REGISTRY_PASSWORD: ${{ secrets.DIAMOND_REGISTRY_PASSWORD }}
+
+      - name: Docker build cathe
+        env:
+          DOCKER_BUILDKIT: 1 # 必ず必要
+        run: |
+          docker image build -t diamond.u-gakugei.ac.jp/springwork2000g0_app:latest --cache-from=diamond.u-gakugei.ac.jp/springwork2000g0_app:latest --build-arg BUILDKIT_INLINE_CACHE=1 -f docker/production/java/Dockerfile .
+          docker image build -t diamond.u-gakugei.ac.jp/springwork2000g0_db:latest --cache-from=diamond.u-gakugei.ac.jp/springwork2000g0_db:latest --build-arg BUILDKIT_INLINE_CACHE=1 -f docker/production/mysql/Dockerfile .
+      - name: Push docker image
+        run: |
+          docker image push diamond.u-gakugei.ac.jp/springwork2000g0_app:latest
+          docker image push diamond.u-gakugei.ac.jp/springwork2000g0_db:latest
