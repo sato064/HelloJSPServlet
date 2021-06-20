@@ -1,29 +1,25 @@
 version: "3" # docker-composeのバージョンを指定
 services:
   app:
-    container_name: local_springwork2000g0_app
+    container_name: local_onsen_app
     build:
       context: ../../
       dockerfile: ./docker/local/java/Dockerfile
     working_dir: /app
     volumes:
-      - ../../../springwork2000g0:/app:cached
+      - ../../.:/app:cached
     environment:
-      JAVA_ENV: development
+      DRIVER_URL: jdbc:mysql://local_onsen_db:3306/db?useUnicode=true&characterEncod
     ports:
       - "8080:8080"
     privileged: true
     tty: true
-    command: >
-      sh -c '
-          ./gradlew 
-          wait-for-it.sh local_springwork2000g0_db:3306 --timeout=30 -- ./gradlew tomcatRun
-      '
+    command: bash -c "sed -i 's/\r//' ./gradlew && ./gradlew tomcatRun"
     networks:
-      - springwork2000g0-network
+      - onsen-network
 
   mysql:
-    container_name: local_springwork2000g0_db
+    container_name: local_onsen_db
     build:
       context: ../../
       dockerfile: ./docker/local/mysql/Dockerfile
@@ -39,18 +35,8 @@ services:
     volumes:
       - "./mysql/init:/docker-entrypoint-initdb.d"
     networks:
-      - springwork2000g0-network
-
-  adminer:
-    image: adminer:4.6
-    container_name: "adminer"
-    ports:
-      - "8081:8080"
-    depends_on:
-      - mysql
-    networks:
-      - springwork2000g0-network
+      - onsen-network
 
 networks:
-  springwork2000g0-network:
+  onsen-network:
     driver: bridge

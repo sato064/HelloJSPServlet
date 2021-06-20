@@ -65,7 +65,7 @@ tomcat() {
     if( project.hasProperty('environment') ){
         contextPath = "${project.environment}"
     } else {
-        contextPath = 'springwork2000g0'
+        contextPath = 'onsen-ikitai'
     }
 }
 

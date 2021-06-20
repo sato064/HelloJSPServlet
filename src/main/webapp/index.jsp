@@ -7,6 +7,6 @@
 
 <html>
   <body>
-    <h1 align="center">Hello SpringWork2000G0!</h1>
+    <h1 align="center">Hello JSP/Servlet!</h1>
   </body>
 </html>

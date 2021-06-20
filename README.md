@@ -1,6 +1,6 @@
-# SoringWork2000G0
+# HelloJSPServlet
 
-春課題のテンプレートリポジトリ
+初めてのJSPServletウェブアプリ
 
 ## ディレクトリ構成
 
