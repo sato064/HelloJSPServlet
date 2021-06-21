@@ -31,8 +31,8 @@ public class HotSpring {
         return comment;
     }
 
-    public void setComment (String Comment) {
-        this.comment = Comment;
+    public void setComment (String comment) {
+        this.comment = comment;
     }
 
 }
