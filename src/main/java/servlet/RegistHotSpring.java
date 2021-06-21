@@ -13,7 +13,8 @@ import java.util.List;
 
 import model.Sample;
 import model.HotSpring;
-import service.SampleService;
+
+import service.HotSpringService;
 
 /** 
 @author O.SATO
@@ -45,13 +46,12 @@ public class RegistHotSpring extends HttpServlet {
       hotSpring.setStar(star);
       hotSpring.setComment(comment);
 
+      HotSpringService service = new HotSpringService();
 
-
-
-
+      service.registHotSpring(hotSpring);
       
-
-      
+      RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
+      dispatcher.forward(request, response);
 
     }
 

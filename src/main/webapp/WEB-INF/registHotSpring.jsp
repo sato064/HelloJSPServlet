@@ -11,7 +11,7 @@
     <form action="./RegistHotSpring" method="post">
       <input type="text" placeholder="名前" name="name" required/><br>
       <input type="number" placeholder="星" min="1" max="5" name="star" required/><br>
-      <input type="text" placeholder="コメント" name="commnet"/><br>
+      <input type="text" placeholder="コメント" name="comment"/><br>
       <a href="./index.jsp">戻る</a>
       <input type="submit" value="登録" name="regist" /><br>
     </form>

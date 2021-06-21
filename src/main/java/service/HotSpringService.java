@@ -2,7 +2,7 @@ package service;
 
 import dao.SampleDao;
 import dao.HotSpringDao;
-import model.hotsprings;
+import model.HotSpring;
 import model.Sample;
 
 import java.sql.Connection;
@@ -37,9 +37,9 @@ public class HotSpringService {
 
     public void registHotSpring(HotSpring hotspring){
         HotSpringDao dao = new HotSpringDao();
-        createConnection(dao);
-        dao.registHotSpring(hotspring);
-        
+        this.connection = dao.createConnection();
+        dao.registHotSpring(connection, hotspring);
+        dao.closeConnection(connection);
     }
 
 }

@@ -49,14 +49,12 @@ public class HotSpringDao extends DriverAccessor {
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1,name);
             stmt.setInt(2,star);
-            stmt.setString(3,commnet);
-
+            stmt.setString(3,comment);
             stmt.executeUpdate();
             stmt.close();
 
         }catch(SQLException e){
             e.printStackTrace();
-            return 0;
         
         } finally{
 
