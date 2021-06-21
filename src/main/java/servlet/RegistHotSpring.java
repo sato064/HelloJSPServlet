@@ -15,8 +15,14 @@ import model.Sample;
 import model.HotSpring;
 import service.SampleService;
 
+/** 
+@author O.SATO
+*/
+
 @WebServlet("/RegistHotSpring")
+
 // HttpServletを継承することで、このクラスはServletとして、働くことができる
+
 public class RegistHotSpring extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
@@ -38,6 +44,12 @@ public class RegistHotSpring extends HttpServlet {
       hotSpring.setName(name);
       hotSpring.setStar(star);
       hotSpring.setComment(comment);
+
+
+
+
+
+      
 
       
 

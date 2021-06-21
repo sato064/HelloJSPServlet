@@ -1,5 +1,9 @@
 package model;
 
+/** 
+@author O.SATO
+*/
+
 public class HotSpring {
     private String name;
     private int star;

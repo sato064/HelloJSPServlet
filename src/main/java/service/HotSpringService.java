@@ -1,13 +1,20 @@
 package service;
 
 import dao.SampleDao;
+import dao.HotSpringDao;
+import model.hotsprings;
 import model.Sample;
 
 import java.sql.Connection;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class SampleService {
+/** 
+@author O.SATO
+*/
+
+
+public class HotSpringService {
 
     private Connection connection = null;
 
@@ -26,6 +33,13 @@ public class SampleService {
         List<Sample> sample = dao.findAll(connection);
         closeConnection(dao);
         return sample;
+    }
+
+    public void registHotSpring(HotSpring hotspring){
+        HotSpringDao dao = new HotSpringDao();
+        createConnection(dao);
+        dao.registHotSpring(hotspring);
+        
     }
 
 }

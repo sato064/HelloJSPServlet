@@ -16,6 +16,7 @@ import service.SampleService;
 
 @WebServlet("/index")
 // HttpServletを継承することで、このクラスはServletとして、働くことができる
+
 public class Index extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
