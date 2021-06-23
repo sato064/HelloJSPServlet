@@ -1,6 +1,5 @@
 package dao;
 
-import model.Sample;
 import model.HotSpring;
 import utility.DriverAccessor;
 
@@ -17,27 +16,6 @@ import java.util.List;
 
 public class HotSpringDao extends DriverAccessor {
     
-    public List<Sample> findAll(Connection connection) {
-        String findAll = "select * from sample";
-        try {
-            PreparedStatement statement = connection.prepareStatement(findAll);
-            ResultSet resultSet = statement.executeQuery();
-            List<Sample> sampleList = new ArrayList<Sample>();
-            while(resultSet.next()) {
-                Sample sample = new Sample();
-                sample.setSampleId(resultSet.getInt("id"));
-                sample.setContent(resultSet.getString("content"));
-                sampleList.add(sample);
-            }
-            statement.close();
-            resultSet.close();
-
-            return sampleList;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
 
     public void registHotSpring(Connection connection,HotSpring hotSpring){
         String sql = "INSERT INTO hotsprings VALUES(?,?,?)";
@@ -56,6 +34,38 @@ public class HotSpringDao extends DriverAccessor {
         }catch(SQLException e){
             e.printStackTrace();
         
+        } finally{
+
+        }
+
+    }
+    public List<HotSpring> showHotSpring(Connection connection){
+
+        String sql = "SELECT * FROM hotsprings";
+        List<HotSpring> hotsprings = new ArrayList<>();
+
+        try{
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+
+            boolean Flag = rs.first();
+            do{
+                HotSpring hs = new HotSpring();
+                hs.setName(rs.getString("name"));
+                hs.setStar(rs.getInt("star"));
+                hs.setComment(rs.getString("comment"));
+                hotsprings.add(hs);
+                Flag = rs.next();
+            } while(Flag);
+
+            stmt.close();
+            rs.close();
+
+            return hotsprings;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
         } finally{
 
         }

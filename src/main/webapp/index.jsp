@@ -9,5 +9,6 @@
   <body>
     <h1 align="center">Hello JSP/Servlet!</h1>
     <a href="./RegistHotSpring">温泉の登録</a>
+    <a href="./ShowHotspring">温泉の情報を見る</a>
   </body>
 </html>
